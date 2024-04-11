@@ -1,4 +1,6 @@
 ## Project: User Registration System
+[![user-registration](https://img.shields.io/endpoint?url=https://cloud.cypress.io/badge/detailed/2xqznk&style=for-the-badge&logo=cypress)](https://cloud.cypress.io/projects/2xqznk/runs)
+
 This project implements a User Registration System, designed to provide a seamless and intuitive interface for users to sign up, log in, and manage their profiles. Built with modern web technologies, this application emphasizes security, user experience, and scalability.
 
 ## Features
@@ -13,6 +15,6 @@ Other Dependencies: Check package.json for a detailed list of libraries and fram
 ## Getting Started
 Clone the Repository: git clone [repository-url]
 Install Dependencies: Run npm install in the project root directory.
-Start the Application: Execute `npm start` to launch the app.
+Start the Application: Execute `npm start` to launch the app and 
 
 `npm run cypress:open` or `npm run cypress:run` from your terminal to manage your Cypress tests
