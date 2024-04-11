@@ -1,6 +1,9 @@
 name: Scheduled Cypress Tests
 
 on:
+  # This allows you to kick off this workflow manually
+  workflow_dispatch:
+
   schedule:
     # Runs every Monday at 4:00 AM EST
     - cron: '00 9 * * 1'
