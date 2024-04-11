@@ -6,25 +6,21 @@ on:
 
 jobs:
   cypress-run:
-    runs-on: ubuntu-20.04
+    runs-on: [self-hosted]
     steps:
       - name: Check out repository code
         uses: actions/checkout@v2
 
-      - name: Clear npm cache
-        run: npm cache clean --force
+      - name: Setup Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '14'
+          cache: 'npm'
 
-      - name: Install Cypress
-        run: npm install cypress
+      - name: Install dependencies
+        run: npm ci # Recommended for CI/CD, faster and cleaner
 
-      - name: Update npm
-        run: npm install -g npm
-
-      - name: Update dependencies
-        run: npm i
-
-
-      - name: run cypress tests
+      - name: Run Cypress tests
         uses: cypress-io/github-action@v5
         with:
           record: false
