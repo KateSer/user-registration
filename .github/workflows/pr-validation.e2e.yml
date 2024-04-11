@@ -11,20 +11,22 @@ jobs:
       - name: Check out repository code
         uses: actions/checkout@v2
 
+      - name: Setup Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '16'
+          cache: 'npm'
+
       - name: Clear npm cache
         run: npm cache clean --force
 
-      - name: Install Cypress
-        run: npm install cypress
+      - name: Install dependencies
+        run: npm ci
 
-      - name: Update npm
-        run: npm install -g npm
-
-      - name: Update dependencies
-        run: npm update
-
-
-      - name: run cypress tests
+      - name: Run Cypress tests
         uses: cypress-io/github-action@v5
         with:
+          start: npm start
+          wait-on: 'http://localhost:4200'
+          wait-on-timeout: 300 # Timeout in seconds, adjust as necessary
           record: false
