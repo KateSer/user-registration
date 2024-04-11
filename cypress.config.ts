@@ -8,5 +8,5 @@ export default defineConfig({
       // implement node event listeners here
     },
   },
-  projectId: "d3o4m9"  // project ID to record cypress tests results
+  projectId: "2xqznk"  // project ID to record cypress tests results
 });

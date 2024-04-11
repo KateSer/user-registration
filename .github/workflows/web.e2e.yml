@@ -2,8 +2,8 @@ name: Scheduled Cypress Tests
 
 on:
   schedule:
-    # every Monday at 4:00 am EST
-   - cron: '00 9 * * 1'
+    # Runs every Monday at 4:00 AM EST
+    - cron: '00 9 * * 1'
 
 jobs:
   nightly:
@@ -12,24 +12,27 @@ jobs:
       - name: Check out repository code
         uses: actions/checkout@v2
 
+      - name: Setup Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '16' # Match the version used in your project
+          cache: 'npm'
+
       - name: Clear npm cache
         run: npm cache clean --force
 
-      - name: Install Cypress
-        run: npm install cypress
-
-      - name: Update npm
-        run: npm install -g npm
-
-      - name: Update dependencies
-        run: npm update
+      - name: Install dependencies
+        run: npm ci
 
       - name: Cypress nightly tests 🌃
         uses: cypress-io/github-action@v5
         with:
+          start: npm start
+          wait-on: 'http://localhost:4200'
+          wait-on-timeout: 300 # Timeout in seconds, adjust as necessary
           record: true
           tag: scheduled
         env:
-          # pass the Cypress Cloud record key as an environment variable
+          # Pass the Cypress Cloud record key as an environment variable
           CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
