@@ -23,27 +23,10 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      - name: Start Server
-        run: npm start &
-        env:
-          CI: true
-
-      - name: Wait for Server
-        run: |
-          echo "Waiting for http://localhost:4200 to be ready..."
-          for i in {1..30}; do
-            if nc -zv localhost 4200; then
-              echo "Server is up and running"
-              break
-            fi
-            echo "Waiting for server..."
-            sleep 2
-          done
-
       - name: Run Cypress tests
         uses: cypress-io/github-action@v5
         with:
           start: npm start
           wait-on: 'http://localhost:4200'
-          wait-on-timeout: 300 # Timeout in seconds
+          wait-on-timeout: 300 # Timeout in seconds, adjust as necessary
           record: false
